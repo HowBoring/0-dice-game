@@ -17,12 +17,16 @@ The basic game play is as follows:
 - On your turn:
   - Roll all six dice and set aside at least one die of a scoring value, (as shown below):
   
-    | Dice  | Points   | Dice  | Points |
-    | ----- | -------- | ----- | ------ |
-    | 1’s   | 100 each | 3x3's | 300    |
-    | 5’s   | 50 each  | 3x4's | 400    |
-    | 3x1's | 1000     | 3x5's | 500    |
-    | 3x2's | 200      | 3x6's | 600    |
+    | Dice  | Points   |
+    | ----- | -------- |
+    | 1’s   | 100 each |
+    | 5’s   | 50 each  |
+    | 3x1's | 1000     |
+    | 3x2's | 200      |
+    | 3x3's | 300      |
+    | 3x4's | 400      |
+    | 3x5's | 500      |
+    | 3x6's | 600      |
 
     Combinations only count when made in a single throw.
    - You may now decide whether to score your points and end your turn or you can re-roll the remaining dice.
@@ -72,3 +76,15 @@ Following is a list of additional features you can include, with the maximum num
 4. Display the dice using ASCII art, showing the faces as pips not as numbers. **\[4\]**
 5. When the first player reaches or exceeds the target score, all other players (in a multi-player game) have one final turn to try and beat that score. In this case, the player at the end of the round with the highest score wins. **\[5\]**
 6. The basic game includes the minimal scoring options to make the game playable. However, you can include three or more of the following scoring combinations to make the game more interesting. **\[5\]**
+   
+   | Dice          | Points      |
+   | ------------- | ----------- |
+   | 3 pairs       | 1000        |
+   | 2x3-of-a-kind | 2000        |
+   | 5-of-a-kind   | 3x points   |
+   | straight*     | 1500        |
+   | 4-of-a-kind   | 2x points   |
+   | 6-of-a-kind   | instant win |
+
+7. Allow the game to be played with computer players. The computer player should be able to make reasonably intelligent decisions for choosing scoring combinations and when to save their points. This AI can be a set of rules that the computer player checks before making a roll or when to save their score. **\[10\]**
+8. Implement a more sophisticated AI for the computer players. You may create different player types, each with their own strategies for playing, such as an easy player, a cautious player, an aggressive player, etc. The human player should be able to select the level of difficulty and number of their opponents at the beginning of the game. **\[10\]**
