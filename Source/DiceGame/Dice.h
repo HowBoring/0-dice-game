@@ -1,8 +1,10 @@
 #pragma once
+#include "stdafx.h"
+
 class Dice
 {
 public:
-	Dice();
-	~Dice();
+    Dice();
+    ~Dice();
+    int printPips(int point);
 };
-
