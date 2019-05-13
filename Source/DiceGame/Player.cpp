@@ -6,9 +6,12 @@ Player::getBonusRoll()
     return 0;
 }
 
-Player::Player(int userID, std::string& username)
+Player::Player(int userID,
+               std::string& username,
+               std::map<CombiSchema, int>& scoreTable)
   : userID(userID)
   , username(username)
+  , scoreTable(scoreTable)
   , currScore(0)
   , totalScore(0)
 {}
@@ -37,4 +40,16 @@ bool
 Player::isFarkle()
 {
     return false;
+}
+
+int
+Player::calculateScore()
+{
+    return 0;
+}
+
+int
+Player::evaluateScore(std::vector<int>& selectList)
+{
+    return 0;
 }

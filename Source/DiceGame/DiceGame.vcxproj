@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CombiSchema.cpp" />
     <ClCompile Include="Dice.cpp" />
     <ClCompile Include="DiceGame.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CombiSchema.h" />
     <ClInclude Include="Dice.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Player.h" />

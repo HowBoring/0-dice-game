@@ -1,11 +1,7 @@
 #include "Dice.h"
 
-Dice::Dice() {}
-
-Dice::~Dice() {}
-
-int
-Dice::printPips(int point)
+std::string
+Dice::getPips(int point)
 {
     std::string pips;
 
@@ -40,7 +36,6 @@ Dice::printPips(int point)
                    "│   ●   │"
                    "│ ●   ● │"
                    "└───────┘";
-
         case 6:
             pips = "┌───────┐"
                    "│ ●   ● │"
@@ -52,6 +47,59 @@ Dice::printPips(int point)
             break;
     }
 
+    return pips;
+}
+
+Dice::Dice()
+  : dicePoint(0)
+{
+    generator = std::default_random_engine(r());
+    uniform_dist = std::uniform_int_distribution<int>(1, 6);
+}
+
+Dice::~Dice() {}
+
+int
+Dice::printPips()
+{
+    return printPips(dicePoint);
+}
+
+int
+Dice::printPips(int point)
+{
+    if (point < 1 || point > 6) {
+        throw std::range_error("Dice point must be in range 1 to 6!");
+        return -1;
+    }
+
+    std::string pips = getPips(point);
+
     std::cout << pips;
     return 0;
+}
+
+int
+Dice::setDicePoint(int point)
+{
+    if (point < 1 || point > 6) {
+        throw std::range_error("Dice point must be in range 1 to 6!");
+        return -1;
+    }
+
+    dicePoint = point;
+    return 0;
+}
+
+int
+Dice::getPoint() const
+{
+    return dicePoint;
+}
+
+int
+Dice::roll()
+{
+    dicePoint = uniform_dist(generator);
+    return dicePoint;
 }
