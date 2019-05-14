@@ -57,6 +57,13 @@ Dice::Dice()
     uniform_dist = std::uniform_int_distribution<int>(1, 6);
 }
 
+Dice::Dice(const Dice& dice) {
+    generator = std::default_random_engine(r());
+    uniform_dist = std::uniform_int_distribution<int>(1, 6);
+
+	dicePoint = dice.dicePoint;
+}
+
 Dice::~Dice() {}
 
 int
@@ -102,4 +109,15 @@ Dice::roll()
 {
     dicePoint = uniform_dist(generator);
     return dicePoint;
+}
+
+Dice&
+Dice::operator=(const Dice& _dice)
+{
+    generator = std::default_random_engine(r());
+    uniform_dist = std::uniform_int_distribution<int>(1, 6);
+
+    dicePoint = _dice.dicePoint;
+
+    return *this;
 }

@@ -19,6 +19,7 @@ class Dice
 
   public:
     Dice();
+    Dice(const Dice& dice);
     ~Dice();
 	
 	// Print the pips of current point.
@@ -30,9 +31,11 @@ class Dice
 	// A public function to change the `dicePoint`.
     int setDicePoint(int point);
 
-	// Return the dicePoint.
+	// Return the `dicePoint`.
     int getPoint() const;
 
 	// Make a roll of dice, return the point.
     int roll();
+
+	Dice& operator=(const Dice& _dice);
 };

@@ -1,10 +1,11 @@
 #pragma once
 #include "stdafx.h"
 
-#include "CombiSchema.h"
-#include "Player.h"
 #include <map>
 #include <vector>
+
+#include "CombiSchema.h"
+#include "Player.h"
 
 class Game
 {
