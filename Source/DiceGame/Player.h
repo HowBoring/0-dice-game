@@ -12,6 +12,7 @@
 
 #include <map>
 #include <vector>
+#include <sstream>
 
 #include "CombiSchema.h"
 #include "Dice.h"
@@ -22,11 +23,13 @@ class Player
     int userID;
     std::string username;
 
+    bool bonusFlag, farkleFlag;
+
     // The dices in current round.
-    std::vector<Dice> currDiceList;
+    std::vector<Dice*> currDiceList;
 
     // The dices asided.
-    std::vector<Dice> asideDiceList;
+    std::vector<Dice*> asideDiceList;
 
     // Scores per round.
     std::vector<int> scoreList;
@@ -48,10 +51,10 @@ class Player
 
     // Input a list of number. For `i` in the list, `currDiceList[i]` will be
     // insert to `asideDiceList`, and then be erased.
-    void selectCombination(const std::vector<int>& selectList);
+    void selectCombi(const std::vector<int>& selectList);
 
     // Evaluate the score of dices combination given.
-    int evaluateCombination(const std::vector<int>& selectList);
+    int evaluateCombi(const std::vector<int>& selectList);
 
     // Judging whether it's a FARKLE.
     bool isFarkle();
@@ -68,15 +71,18 @@ class Player
     // If all the dices are put aside, take a BONUS ROLL.
     int getBonusRoll();
 
-	// Print the result after `rollDices()` performed.
-	void printRollRst();
+    // Print the result after `rollDices()` performed.
+    void printRollRst();
 
-	// A formatted output.
-	void printTips(std::string tips);
+    // A formatted output.
+    void printTips(std::string tips);
+
+    // Let the user choose the next action.
+    bool optionInteractive(std::string question);
 
   public:
     Player(int userID,
-           std::string& username,
+           std::string username,
            std::map<CombiSchema, int>& scoreTable);
 
     ~Player();
@@ -90,3 +96,10 @@ class Player
     // Calculate the score of dices combination in `currDiceList`.
     int calculateScore();
 };
+
+template<typename Out>
+void
+split(const std::string& s, char delim, Out result);
+
+std::vector<int>
+split(const std::string& s, char delim);

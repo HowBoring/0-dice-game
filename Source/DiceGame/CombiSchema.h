@@ -1,10 +1,12 @@
 #pragma once
 #include "stdafx.h"
 
+#include <array>
+
 class CombiSchema
 {
   private:
-    int* schema;
+    std::array<int, 6> schema;
     int quantity;
 
   public:
@@ -13,13 +15,11 @@ class CombiSchema
     CombiSchema(const char* combination);
     ~CombiSchema();
 
-	bool contain(const CombiSchema& _combiSchema);
+    bool contain(const CombiSchema& _combiSchema);
 
-	CombiSchema operator-(const CombiSchema& _combiSchema);
+    //CombiSchema operator-(const CombiSchema& _combiSchema);
     bool operator<(const CombiSchema& _combiSchema) const;
 
-	int* getSchema() const;
-
-	std::string printSchema();
-
+    std::array<int, 6> getSchema() const;
+    int printSchema();
 };

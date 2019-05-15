@@ -3,17 +3,13 @@
 CombiSchema::CombiSchema()
   : quantity(0)
 {
-    schema = new int[6];
-    for (size_t i = 0; i < 6; i++) {
-        schema[i] = 0;
-    }
+    schema = { 0, 0, 0, 0, 0, 0 };
 }
 
 CombiSchema::CombiSchema(int* combination)
 {
     int _quantity = 0;
-
-    schema = new int[6];
+    schema = { 0, 0, 0, 0, 0, 0 };
     for (size_t i = 0; i < 6; i++) {
         schema[i] = combination[i];
         _quantity += schema[i];
@@ -25,8 +21,7 @@ CombiSchema::CombiSchema(int* combination)
 CombiSchema::CombiSchema(const char* combination)
 {
     int _quantity = 0;
-
-    schema = new int[6];
+    schema = { 0, 0, 0, 0, 0, 0 };
     for (size_t i = 0; i < 6; i++) {
         schema[i] = combination[i] - '0';
         _quantity += schema[i];
@@ -51,6 +46,7 @@ CombiSchema::contain(const CombiSchema& _combiSchema)
     return rst;
 }
 
+/*
 CombiSchema
 CombiSchema::operator-(const CombiSchema& _combiSchema)
 {
@@ -65,25 +61,28 @@ CombiSchema::operator-(const CombiSchema& _combiSchema)
 
     return CombiSchema(rstCombination);
 }
+*/
 
 bool
 CombiSchema::operator<(const CombiSchema& _combiSchema) const
 {
-    return schema[0] < _combiSchema.schema[0] &&
-           schema[1] < _combiSchema.schema[1] &&
-           schema[2] < _combiSchema.schema[2] &&
-           schema[3] < _combiSchema.schema[3] &&
-           schema[4] < _combiSchema.schema[4] &&
-           schema[5] < _combiSchema.schema[5];
+    int schema_lh = 0, schema_rh = 0;
+    for (size_t i = 0, d = 100000; i < 6; i++) {
+        schema_lh += d * schema[i];
+        schema_rh += d * _combiSchema.schema[i];
+        d /= 10;
+    }
+
+    return schema_lh < schema_rh;
 }
 
-int*
+std::array<int, 6>
 CombiSchema::getSchema() const
 {
     return schema;
 }
 
-std::string
+int
 CombiSchema::printSchema()
 {
     int _schema = 0;
@@ -92,5 +91,5 @@ CombiSchema::printSchema()
         d /= 10;
     }
 
-    return std::to_string(_schema);
+    return _schema;
 }

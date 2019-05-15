@@ -7,41 +7,47 @@ Dice::getPips(int point)
 
     switch (point) {
         case 1:
-            pips = "┌───────┐"
-                   "│       │"
-                   "│   ●   │"
-                   "│       │"
-                   "└───────┘";
+            pips = "┌───────┐\n"
+                   "│       │\n"
+                   "│   O   │\n"
+                   "│       │\n"
+                   "└───────┘\n";
+            break;
         case 2:
-            pips = "┌───────┐"
-                   "│       │"
-                   "│ ●   ● │"
-                   "│       │"
-                   "└───────┘";
+            pips = "┌───────┐\n"
+                   "│       │\n"
+                   "│ O   O │\n"
+                   "│       │\n"
+                   "└───────┘\n";
+            break;
         case 3:
-            pips = "┌───────┐"
-                   "│ ●     │"
-                   "│   ●   │"
-                   "│     ● │"
-                   "└───────┘";
+            pips = "┌───────┐\n"
+                   "│ O     │\n"
+                   "│   O   │\n"
+                   "│     O │\n"
+                   "└───────┘\n";
+            break;
         case 4:
-            pips = "┌───────┐"
-                   "│ ●   ● │"
-                   "│       │"
-                   "│ ●   ● │"
-                   "└───────┘";
+            pips = "┌───────┐\n"
+                   "│ O   O │\n"
+                   "│       │\n"
+                   "│ O   O │\n"
+                   "└───────┘\n";
+            break;
         case 5:
-            pips = "┌───────┐"
-                   "│ ●   ● │"
-                   "│   ●   │"
-                   "│ ●   ● │"
-                   "└───────┘";
+            pips = "┌───────┐\n"
+                   "│ O   O │\n"
+                   "│   O   │\n"
+                   "│ O   O │\n"
+                   "└───────┘\n";
+            break;
         case 6:
-            pips = "┌───────┐"
-                   "│ ●   ● │"
-                   "│ ●   ● │"
-                   "│ ●   ● │"
-                   "└───────┘";
+            pips = "┌───────┐\n"
+                   "│ O   O │\n"
+                   "│ O   O │\n"
+                   "│ O   O │\n"
+                   "└───────┘\n";
+            break;
 
         default:
             break;
@@ -82,7 +88,7 @@ Dice::printPips(int point)
 
     std::string pips = getPips(point);
 
-    std::cout << pips;
+    std::cout << pips << std::endl;
     return 0;
 }
 
