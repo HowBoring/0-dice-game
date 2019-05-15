@@ -7,9 +7,12 @@ Player::Player(int userID,
   , username(username)
   , scoreTable(scoreTable)
   , bonusFlag(false)
+  , stopFlag(false)
   , farkleFlag(false)
+  , selectFlag(false)
+  , invalidFlag(false)
   , currScore(0)
-  , totalScore(0)
+  , localScore(0)
 {
     scoreList.clear();
 }
@@ -22,6 +25,7 @@ Player::getName()
     return username;
 }
 
+/*
 int
 Player::playNewRound()
 {
@@ -131,10 +135,12 @@ Player::playNewRound()
 
     return 0;
 }
+*/
 
 void
 Player::initRound()
 {
+    bonusFlag = stopFlag = farkleFlag = selectFlag = invalidFlag = false;
     currDiceList.clear();
     asideDiceList.clear();
     currScore = 0;
@@ -156,10 +162,15 @@ Player::rollDices()
 }
 
 void
-Player::selectCombi(const std::vector<int>& selectList)
+Player::selectCombi(std::vector<int>& selectList)
 {
+    std::sort(selectList.begin(),
+		selectList.end(),
+		[](int x, int y) -> bool { return x > y; }
+	);
+
     for (auto diceOrder : selectList) {
-        asideDiceList.push_back(currDiceList[diceOrder - 1]);
+        asideDiceList.push_back(currDiceList[(__int64)diceOrder - 1]);
         currDiceList.erase(currDiceList.begin() + diceOrder - 1);
     }
 }
@@ -179,7 +190,6 @@ bool
 Player::isFarkle()
 {
     CombiSchema _currSchema = getCurrSchema();
-    // std::cout << _currSchema.printSchema() << std::endl;
 
     // If the current situation DOES include any scoring method,
     // then return false
@@ -215,7 +225,7 @@ Player::getSchema(const std::vector<int>& selectList)
 
     // Statistics the current number of dice points.
     for (auto diceOrder : selectList) {
-        _currSchema[currDiceList[diceOrder - 1]->getPoint() - 1]++;
+        _currSchema[currDiceList[(__int64)diceOrder - 1]->getPoint() - 1]++;
     }
 
     return CombiSchema(_currSchema);
@@ -232,7 +242,7 @@ Player::printRollRst()
 {
     char i = '1';
     for (auto dice : currDiceList) {
-        std::cout << i++ << ". [" << dice->getPoint() << "]    ";
+        std::cout << i++ << ". [" << dice->getPoint() << "]   ";
     }
     std::cout << std::endl;
 }
@@ -260,15 +270,137 @@ Player::optionInteractive(std::string question)
     }
 
     if (inputStr == "Y" || inputStr == "y") {
-        return false;
+        return true;
     }
 
-    return true;
+    return false;
 }
 
 int
 Player::calculateScore()
 {
+    return 0;
+}
+
+int
+Player::newRound()
+{
+    initRound();
+
+    do {
+        stopFlag = false;
+        selectList.clear();
+    } while (rollLoop() && !farkleFlag);
+    return 0;
+}
+
+int
+Player::rollLoop()
+{
+    do {
+        if (bonusFlag) {
+            currDiceList.clear();
+            asideDiceList.clear();
+
+            for (size_t i = 0; i < 6; i++) {
+                currDiceList.push_back(new Dice());
+            }
+        }
+        bonusFlag = false;
+    } while (bonusLoop() && !farkleFlag);
+
+    stopFlag = optionInteractive("Stop and save score? (y/n)");
+
+    if (stopFlag) {
+        return 0;
+    }
+
+    return 1;
+}
+
+int
+Player::bonusLoop()
+{
+    rollDices();
+
+    if (isFarkle()) {
+        farkleFlag = true;
+        eraseScore();
+        return 0;
+    }
+
+    do {
+        selectFlag = false;
+        currScore = 0;
+    } while (selectLoop());
+
+    if (isBonus()) {
+        bonusFlag = true;
+        return 1;
+    }
+
+    return 0;
+}
+
+int
+Player::selectLoop()
+{
+    do {
+        invalidFlag = false;
+        localScore = 0;
+    } while (validLoop());
+
+    selectCombi(selectList);
+    scoreList.back() += currScore;
+
+    if (isFarkle()) {
+        return 0;
+    }
+
+    selectFlag = optionInteractive("Stop to select? (y/n)");
+
+    if (selectFlag) {
+        return 0;
+    }
+
+    return 1;
+}
+
+int
+Player::validLoop()
+{
+    printRollRst();
+    printTips(
+      "Please select dice combination: (split by SPACE while end by ENTER)");
+
+    std::string inputLine;
+    std::getline(std::cin, inputLine);
+    selectList = split(inputLine, ' ');
+
+    for (auto i : selectList) {
+        if (i < 1 || i > 6) {
+            printTips("Wrong input, try again.");
+            invalidFlag = true;
+            return 1;
+        }
+    }
+
+    localScore = evaluateCombi(selectList);
+
+    if (!localScore || !selectList.size()) {
+        printTips("Wrong combination, try again.");
+        invalidFlag = true;
+        return 1;
+    }
+
+    return 0;
+}
+
+int
+Player::eraseScore()
+{
+    currScore = 0;
+    scoreList.back() = 0;
     return 0;
 }
 

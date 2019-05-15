@@ -10,6 +10,7 @@
 #pragma once
 #include "stdafx.h"
 
+#include <algorithm>
 #include <map>
 #include <sstream>
 #include <vector>
@@ -22,8 +23,8 @@ class Player
   private:
     int userID;
     std::string username;
-
-    bool bonusFlag, farkleFlag;
+    std::vector<int> selectList;
+    bool bonusFlag, stopFlag, farkleFlag, selectFlag, invalidFlag;
 
     // The dices in current round.
     std::vector<Dice*> currDiceList;
@@ -35,10 +36,10 @@ class Player
     std::vector<int> scoreList;
 
     // Score of current round.
-    int currScore;
+    int currScore, localScore;
 
     // Total score of all passed round.
-    int totalScore;
+    // int totalScore;
 
     // Score Rules Table
     std::map<CombiSchema, int>& scoreTable;
@@ -51,7 +52,7 @@ class Player
 
     // Input a list of number. For `i` in the list, `currDiceList[i]` will be
     // insert to `asideDiceList`, and then be erased.
-    void selectCombi(const std::vector<int>& selectList);
+    void selectCombi(std::vector<int>& selectList);
 
     // Evaluate the score of dices combination given.
     int evaluateCombi(const std::vector<int>& selectList);
@@ -91,10 +92,28 @@ class Player
     const std::string& getName();
 
     // The MAIN process, start a new round.
-    int playNewRound();
+    // int playNewRound();
 
     // Calculate the score of dices combination in `currDiceList`.
     int calculateScore();
+
+    // A new realization for main process.
+    int newRound();
+
+    // Loop 1.
+    int rollLoop();
+
+    // Loop 2.
+    int bonusLoop();
+
+    // Loop 3.
+    int selectLoop();
+
+    // Loop 4.
+    int validLoop();
+
+    // Erase score.
+    int eraseScore();
 };
 
 template<typename Out>

@@ -25,7 +25,7 @@ main()
 
     Player* p = new Player(userID, username, scoreTable);
 
-    p->playNewRound();
+    p->newRound();
 
     return 0;
 }
