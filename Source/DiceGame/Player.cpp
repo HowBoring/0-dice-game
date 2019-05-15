@@ -46,21 +46,21 @@ Player::playNewRound()
         while (true) {
             selectList.clear();
 
-            printTips(
-              "Choose your dice combination: (serial numbers, split with space while end with ENTER)");
+            printTips("Choose your dice combination: (serial numbers, split "
+                      "with space while end with ENTER)");
 
             while (true) {
                 bool inputValid;
                 bool quitFlag = false;
 
-				// Get the user input.
+                // Get the user input.
                 do {
                     selectList.clear();
                     inputValid = true;
 
                     std::getline(std::cin, inputLine);
-					
-					// Do nothing in this loop.
+
+                    // Do nothing in this loop.
                     if (inputLine == "quit") {
                         quitFlag = true;
                         break;
@@ -77,9 +77,9 @@ Player::playNewRound()
                     }
                 } while (!inputValid);
 
-				if (quitFlag) {
+                if (quitFlag) {
                     break;
-				}
+                }
 
                 if (selectList.size() > currDiceList.size()) {
                     printTips("Input too much, please try again.");
@@ -99,7 +99,8 @@ Player::playNewRound()
             selectCombi(selectList);
             scoreList.back() += currScore;
 
-            std::cout << "You get " << currScore << " score in through this action." << std::endl;
+            std::cout << "You get " << currScore
+                      << " score in through this action." << std::endl;
 
             if (isBonus()) {
                 bonusFlag = true;

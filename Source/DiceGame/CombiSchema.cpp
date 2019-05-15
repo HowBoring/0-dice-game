@@ -46,23 +46,6 @@ CombiSchema::contain(const CombiSchema& _combiSchema)
     return rst;
 }
 
-/*
-CombiSchema
-CombiSchema::operator-(const CombiSchema& _combiSchema)
-{
-    int rstCombination[6];
-    for (size_t i = 0; i < 6; i++) {
-        rstCombination[i] = schema[i] - _combiSchema.getSchema()[i];
-        if (rstCombination[i] < 0) {
-            throw std::logic_error("Unable to perform subtraction, there was "
-                                   "an unexpected negative value.");
-        }
-    }
-
-    return CombiSchema(rstCombination);
-}
-*/
-
 bool
 CombiSchema::operator<(const CombiSchema& _combiSchema) const
 {

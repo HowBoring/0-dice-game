@@ -63,11 +63,12 @@ Dice::Dice()
     uniform_dist = std::uniform_int_distribution<int>(1, 6);
 }
 
-Dice::Dice(const Dice& dice) {
+Dice::Dice(const Dice& dice)
+{
     generator = std::default_random_engine(r());
     uniform_dist = std::uniform_int_distribution<int>(1, 6);
 
-	dicePoint = dice.dicePoint;
+    dicePoint = dice.dicePoint;
 }
 
 Dice::~Dice() {}

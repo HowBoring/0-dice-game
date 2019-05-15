@@ -19,13 +19,13 @@ main()
         { CombiSchema("000030"), 500 },  { CombiSchema("000003"), 600 }
     };
 
-	int userID = 0;
+    int userID = 0;
 
-	std::string username = "Player1";
+    std::string username = "Player1";
 
     Player* p = new Player(userID, username, scoreTable);
 
-	p->playNewRound();
+    p->playNewRound();
 
     return 0;
 }

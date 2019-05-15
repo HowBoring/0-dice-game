@@ -17,7 +17,7 @@ class CombiSchema
 
     bool contain(const CombiSchema& _combiSchema);
 
-    //CombiSchema operator-(const CombiSchema& _combiSchema);
+    // CombiSchema operator-(const CombiSchema& _combiSchema);
     bool operator<(const CombiSchema& _combiSchema) const;
 
     std::array<int, 6> getSchema() const;

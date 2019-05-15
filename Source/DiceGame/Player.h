@@ -11,8 +11,8 @@
 #include "stdafx.h"
 
 #include <map>
-#include <vector>
 #include <sstream>
+#include <vector>
 
 #include "CombiSchema.h"
 #include "Dice.h"
