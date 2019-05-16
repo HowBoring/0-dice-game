@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 
+#include <array>
 #include <random>
 
 class Dice
@@ -14,15 +15,16 @@ class Dice
     std::default_random_engine generator;
     std::uniform_int_distribution<int> uniform_dist;
 
-    // Converting point to pips.
-    std::string getPips(int point);
 
   public:
     Dice();
     Dice(const Dice& dice);
     ~Dice();
 
-    // Print the pips of current point.
+    // Converting point to pips.
+    std::array<std::string, 5> getPips(int point);
+
+	// Print the pips of current point.
     int printPips();
 
     // Print the pips of given point.

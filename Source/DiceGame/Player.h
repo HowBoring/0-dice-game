@@ -36,13 +36,28 @@ class Player
     std::vector<int> scoreList;
 
     // Score of current round.
-    int currScore, localScore;
+    int currScore, localScore, consecutiveFarkle;
 
-    // Total score of all passed round.
-    // int totalScore;
+    int targetScore;
+    int minimumScore;
 
     // Score Rules Table
     std::map<CombiSchema, int>& scoreTable;
+
+    // Loop 1.
+    int rollLoop();
+
+    // Loop 2.
+    int bonusLoop();
+
+    // Loop 3.
+    int selectLoop();
+
+    // Loop 4.
+    int validLoop();
+
+    // Erase score.
+    int eraseScore();
 
     // Reset the lists to the initialized state.
     void initRound();
@@ -52,7 +67,7 @@ class Player
 
     // Input a list of number. For `i` in the list, `currDiceList[i]` will be
     // insert to `asideDiceList`, and then be erased.
-    void selectCombi(std::vector<int>& selectList);
+    void selectCombi(const std::vector<int>& selectList);
 
     // Evaluate the score of dices combination given.
     int evaluateCombi(const std::vector<int>& selectList);
@@ -75,6 +90,9 @@ class Player
     // Print the result after `rollDices()` performed.
     void printRollRst();
 
+    // Print the pips result.
+    void printRollRst(int);
+
     // A formatted output.
     void printTips(std::string tips);
 
@@ -84,36 +102,28 @@ class Player
   public:
     Player(int userID,
            std::string username,
-           std::map<CombiSchema, int>& scoreTable);
-
+           std::map<CombiSchema, int>& scoreTable,
+           int targetScore,
+           int minimumScore);
     ~Player();
 
     // Return the name of the player.
     const std::string& getName();
 
+	int getID();
+
+    int getScore();
+
+    int getFarkleCount();
+
     // The MAIN process, start a new round.
     // int playNewRound();
-
-    // Calculate the score of dices combination in `currDiceList`.
-    int calculateScore();
 
     // A new realization for main process.
     int newRound();
 
-    // Loop 1.
-    int rollLoop();
-
-    // Loop 2.
-    int bonusLoop();
-
-    // Loop 3.
-    int selectLoop();
-
-    // Loop 4.
-    int validLoop();
-
-    // Erase score.
-    int eraseScore();
+    // Calculate the score of dices combination in `currDiceList`.
+    int calculateScore();
 };
 
 template<typename Out>
