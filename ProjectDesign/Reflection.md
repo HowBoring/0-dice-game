@@ -14,7 +14,7 @@ However, after refactoring, my development progress has been significantly impro
 
 I completed the first four in the *Extra Functionality* list. In the development of the second function, I did not consider the deduction in the design. I get the total score by recording each saved score and summing it up. Thanks to the good design, I quickly completed the revision of the scoring system.
 
-![1558081133381](C:\Users\Zachariah\AppData\Roaming\Typora\typora-user-images\1558081133381.png)
+![Screenshot](Figures/Screenshot.png)
 
 ## Conclusion
 
