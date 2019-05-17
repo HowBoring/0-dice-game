@@ -1,12 +1,3 @@
-/*
- *  @file		Player.h
- *  @brief		Define the player class in the game.
- *  @author		Zachariah Hou
- *  @email		code7thday@outlook.com
- *  @version	1.0.0
- *  @date		2019-06-12
- */
-
 #pragma once
 #include "stdafx.h"
 
